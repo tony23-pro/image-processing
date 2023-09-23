@@ -147,6 +147,45 @@ var MathImg = /** @class */ (function () {
         }
         return sal;
     };
+    //FUNCION TRICOLOR AGREGADA 23/09/2023//
+    MathImg.toTricolorH = function (img) {
+        // Variable que guarda el arreglo 3D de la imagen de color
+        var arrImage = img.getArrayImg();
+        // Variable donde guardamos la salida
+        var sal = this.initArray(img.getWidth(), img.getHeight());
+        var inicio = 0, termino = img.getHeight() / 3;
+        console.log(inicio, termino);
+        // Primera banda horizontal (parte superior)
+        for (var i = inicio; i < termino; i++) {
+            for (var j = 0; j < img.getWidth(); j++) {
+                sal[0][i][j] = 0;
+                sal[1][i][j] = arrImage[1][i][j];
+                sal[2][i][j] = 0;
+            }
+        }
+        inicio = termino;
+        termino = 2 * img.getHeight() / 3;
+        // Segunda banda horizontal (parte central)
+        for (var i = inicio; i < termino; i++) {
+            for (var j = 0; j < img.getWidth(); j++) {
+                sal[0][i][j] = arrImage[0][i][j];
+                sal[1][i][j] = arrImage[0][i][j];
+                sal[2][i][j] = arrImage[0][i][j];
+            }
+        }
+        inicio = termino;
+        termino = img.getHeight();
+        // Tercera banda horizontal (parte inferior)
+        for (var i = inicio; i < termino; i++) {
+            for (var j = 0; j < img.getWidth(); j++) {
+                sal[0][i][j] = arrImage[0][i][j];
+                sal[1][i][j] = 0;
+                sal[2][i][j] = 0;
+            }
+        }
+        return sal;
+    };
+    //HASTA AQUI
     MathImg.correctionGamma = function (img, factores) {
         //variable que guarda el arreglo 3d de la imagen de color
         var arrImage = img.getArrayImg();

@@ -65,6 +65,13 @@ function convertirTricolor(evt: any): void{
   var imagenSal:ImageType = new ImageType(pantalla1, imgLocal.getImage());
   imagenSal.imageArray2DtoData(pantalla2, MathImg.toTricolor(imagenSal));
 }
+//NuevaFUNCION TRICOLOR HORIZONTAL
+function convertirTricolorH(evt: any): void{
+  var imagenSal:ImageType = new ImageType(pantalla1, imgLocal.getImage());
+  imagenSal.imageArray2DtoData(pantalla2, MathImg.toTricolorH(imagenSal));
+}
+
+////FIN TRICOLOR HORIZONTAL
 ////////////hasta aqui
 function correccionGamma(evt: any): void{
   var args = prompt('Ingresa los factores de correccion Gamma, separados por coma');
@@ -438,6 +445,9 @@ document.getElementById("op-rojo").addEventListener('click', convertirARojo, fal
 document.getElementById("op-verde").addEventListener('click', convertirAVerde, false);
 document.getElementById("op-azul").addEventListener('click', convertirAAzul, false);
 document.getElementById("op-tricolor").addEventListener('click', convertirTricolor, false);
+//NEW TRICOLORH
+document.getElementById("op-tricolorH").addEventListener('click', convertirTricolorH, false);
+//ENDTRICOLORH
 document.getElementById("op-gamma").addEventListener('click', correccionGamma, false);
 document.getElementById("op-umbral1").addEventListener('click', umbralizado, false);
 document.getElementById("op-umbral-2-limites").addEventListener('click', umbral2limites, false);
