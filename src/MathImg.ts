@@ -25,7 +25,63 @@ export class MathImg {
     }
     return arrImage;
   }
+    //nuvaFUNCION DE REALCE 
+public static realceImagen(img: ImageType): number[][][] {
+  // Obtiene la matriz 3D de la imagen en color
+  var arrImage = img.getArrayImg();
+  // Inicializa la matriz de salida
+  var result = this.initArray(img.getWidth(), img.getHeight());
 
+  // Define un kernel de realce (puedes ajustar los valores según tus necesidades)
+ /* var kernel = [
+    [-1, -1, -1],
+    [-1, 9, -1],
+    [-1, -1, -1]
+  ];*/
+  /*Kernel de Detección de Bordes (Edge Detection):
+Un kernel de detección de bordes resalta los bordes en la imagen.
+  var kernel = [
+             [-1 , -1,  -1],
+             [-1,   8,  -1],
+             [-1 , -1  ,-1]
+            ];*/
+ /*Kernel de Desenfoque (Blur):
+Un kernel de desenfoque suaviza la imagen y reduce el ruido.           
+  var kernel = [
+[1/9 , 1/9 , 1/9],
+[1/9 , 1/9 , 1/9],
+[1/9 , 1/9 , 1/9]
+
+  ];*/
+  //kernel de realce sharpen
+ /* var kernel = [
+    [0 , -1  , 0],
+    [-1 , 5 , -1],
+    [0  ,-1 ,  0]
+  ];
+*/
+var kernel =[
+[-1 ,  -1 , -1  ] ,
+[-1 ,  8 , -1  ],
+[-1 , -1 , -1 ] ]; 
+
+  for (let i = 1; i < img.getHeight() - 1; i++) {
+    for (let j = 1; j < img.getWidth() - 1; j++) {
+      for (let c = 0; c < 3; c++) {
+        let sum = 0;
+        // Aplica el filtro de convolución alrededor del píxel (i, j)
+        for (let x = -1; x <= 1; x++) {
+          for (let y = -1; y <= 1; y++) {
+            sum += arrImage[c][i + x][j + y] * kernel[x + 1][y + 1];
+          }
+        }
+        // Asegura que los valores estén en el rango 0-255
+        result[c][i][j] = Math.min(255, Math.max(0, sum));
+      }
+    }
+  }
+  return result;
+}
   public static toGray(img: ImageType): number[][][] {
     //variable que guarda el arreglo 3d de la imagen de color
     var arrImage = img.getArrayImg();
@@ -197,6 +253,7 @@ export class MathImg {
     return sal;
 }
   //HASTA AQUI
+
   public static correctionGamma(img: ImageType, factores: number[]): number[][][] {
     //variable que guarda el arreglo 3d de la imagen de color
     var arrImage = img.getArrayImg();

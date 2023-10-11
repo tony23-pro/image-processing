@@ -416,6 +416,11 @@ function shearingX(evt: any): void{
   var imagenSal: ImageType = new ImageType(pantalla1, imgLocal.getImage());
   imagenSal.imageArray2DtoData(pantalla2, MathImg.shearingX(imagenSal, factor));
 }
+// funcion de realce
+function convertirRealce(evt: any): void{
+  var imagenSal:ImageType = new ImageType(pantalla1, imgLocal.getImage());
+  imagenSal.imageArray2DtoData(pantalla2, MathImg.realceImagen(imagenSal));
+}
 
 function shearingY(evt: any): void{
   var argss = prompt('Ingresa un factor de shearing');
@@ -461,7 +466,8 @@ document.getElementById("op-gradienteX").addEventListener('click', colorGradient
 document.getElementById("op-gradienteY").addEventListener('click', colorGradienteY, false);
 document.getElementById("op-contraste").addEventListener('click', opchangeContraste, false);
 document.getElementById("op-falsocolor").addEventListener('click', opchangeFalsoColor, false);
-
+//llamando mi funcion de realce 
+document.getElementById("op-realce").addEventListener('click', convertirRealce, false);
 //op matematicas
 document.getElementById("op-pow").addEventListener('click', opgetPow, false);
 document.getElementById("op-sqrt").addEventListener('click', sqrt, false);
